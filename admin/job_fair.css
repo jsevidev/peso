@@ -1,0 +1,508 @@
+:root {
+  --color-primary: #0a008f;
+  --color-secondary: #eb6935;
+  --color-background: #f3f7fa;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-text-light: #666666;
+  --color-text-placeholder: #c0bdbd;
+  --color-success: #34c759;
+  --color-danger-bg: rgba(255, 0, 0, 0.26);
+  --color-danger-border: #eb4335;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-open-sans: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-poppins);
+  background-color: var(--color-background);
+  color: var(--color-black);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 36px;
+    background-color: var(--color-secondary);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+    /* 💥 THIS IS CRITICAL: Make sure this value is the same in both CSS files */
+    min-height: 113px; 
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.logo-img {
+    width: 86px;
+    height: 86px;
+}
+
+.site-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--color-white);
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 29px;
+}
+
+.notification-button img {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.search-form {
+    position: relative;
+    width: 435px;
+    height: 49px;
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    border: none;
+    padding: 0 110px 0 24px; /* The 110px on the right side reserves space for the button */
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    box-shadow: var(--shadow-dark);
+}
+
+.search-button {
+    position: absolute; /* Positions the button relative to the .search-form */
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%); /* Centers the button vertically */
+    width: 91px;
+    height: 39px;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.notification-button {
+  width: 40px;
+  height: 40px;
+}
+
+.notification-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.admin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 49px;
+  background-color: var(--color-primary);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--color-white);
+  font-family: var(--font-open-sans);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+@media (max-width: 1024px) {
+  .header-container {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+    padding-bottom: 15px;
+  }
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .search-form {
+    width: 100%;
+    max-width: 435px;
+  }
+}
+
+.dashboard-body {
+    display: flex;
+    /* max-width: 1440px;
+    margin: 0 auto; */
+    min-height: calc(1024px - 113px); /* Figma height - header height */
+}
+
+
+.sidebar {
+    flex-shrink: 0;
+    width: 346px;
+    background-color: var(--color-primary);
+    padding: 20px 33px 27px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.sidebar-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.sidebar-nav li a {
+  display: block;
+  padding: 12px 30px;
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--color-white);
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-nav li.active a {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  box-shadow: 0px 0px 10px 0px var(--color-secondary);
+  width: 279px;
+  text-align: center;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 225px;
+  height: 46px;
+  background-color: var(--color-white);
+  border-radius: 20px;
+  font-family: var(--font-poppins);
+  font-size: 32px;
+  color: var(--color-black);
+}
+
+.logout-button img {
+  width: 30px;
+  height: 30px;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 28px 22px 31px 19px;
+}
+
+.job-fairs-card {
+  background-color: #fef8f8;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 27px 12px 95px 12px;
+  /* height: 100%; */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+}
+
+.card-title {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--color-black);
+}
+
+.add-job-fair-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 23px 14px 9px;
+  background-color: var(--color-primary);
+  border-radius: 100px;
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 13px 12px;
+  background-color: #fef8f8;
+  box-shadow: 2px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+.filter-search {
+  position: relative;
+  width: 302px;
+  height: 51px;
+}
+.filter-search input {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  border: none;
+  background-color: var(--color-background);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0 100px 0 24px;
+  font-size: 16px;
+  color: var(--color-text-placeholder);
+}
+.filter-search button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 91px;
+  height: 32px;
+  background-color: var(--color-secondary);
+  border-radius: 100px;
+  color: var(--color-background);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.filter-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 147px;
+  height: 51px;
+  padding: 0 17px 0 17px;
+  background-color: var(--color-background);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.filter-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 103px;
+  height: 51px;
+  background-color: var(--color-background);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.job-fairs-table {
+  background-color: var(--color-background);
+}
+
+.table-header, .table-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr 2fr 1.2fr 0.8fr 0.8fr;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+.table-header {
+  background-color: #d9efff;
+  font-weight: 400;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.table-row {
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 72px;
+}
+.table-row:last-child {
+  border-bottom: none;
+}
+
+[class^="col-"] {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.col-title, .col-location {
+  line-height: 28px;
+}
+
+.col-companies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.company-tag {
+  background-color: var(--color-white);
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+  padding: 0 5px;
+  font-size: 10px;
+  line-height: 19px;
+  white-space: nowrap;
+}
+
+.link {
+  color: var(--color-black);
+}
+
+.link-view {
+  color: var(--color-primary);
+  line-height: 28px;
+}
+
+.status-past {
+  color: var(--color-text-light);
+}
+
+.status-upcoming {
+  color: var(--color-success);
+}
+
+.col-action {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.action-btn {
+  font-size: 10px;
+  border-radius: 5px;
+  padding: 0 5px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.edit-btn {
+  background-color: var(--color-white);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+  color: var(--color-black);
+  width: 29px;
+}
+
+.delete-btn {
+  background-color: var(--color-danger-bg);
+  border: 1px solid var(--color-danger-border);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.25);
+  color: var(--color-black);
+  width: 41px;
+}
+
+@media (max-width: 1200px) {
+  .table-header, .table-row {
+    grid-template-columns: 1.5fr 1fr 1.5fr 1.5fr 1fr 0.8fr 0.8fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .logout-button {
+    margin-top: 15px;
+  }
+  .job-fairs-table {
+    overflow-x: auto;
+  }
+  .table-header, .table-row {
+    grid-template-columns: minmax(150px, 1.5fr) minmax(100px, 1fr) minmax(150px, 1.5fr) minmax(200px, 2fr) minmax(120px, 1.2fr) minmax(100px, 0.8fr) minmax(80px, 0.8fr);
+    width: 1100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-nav li a {
+    font-size: 24px;
+    padding: 8px 15px;
+  }
+  .logout-button {
+    font-size: 24px;
+    width: 180px;
+    height: 40px;
+  }
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-search, .filter-date, .filter-clear {
+    width: 100%;
+  }
+}

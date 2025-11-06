@@ -1,0 +1,315 @@
+:root {
+  --primary-color: #eb6935;
+  --secondary-color: #0a008f;
+  --background-light: #f3f7fa;
+  --background-white: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-light: #ffffff;
+  --border-color: #c0bdbd;
+  --shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+} */
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-primary);
+}
+
+/* .container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+} */
+
+.job-listing-section {
+  padding: 70px 20px;
+}
+
+.listing-container {
+  max-width: 1270px;
+  margin: 0 auto;
+  /* background-color: var(--background-white);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 330px 1fr; */
+}
+
+.filters-sidebar {
+  padding: 27px 24px;
+  border-right: 1px solid #c0bdbd;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-count {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin: 0 0 46px 0;
+}
+
+.filter-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 17px 0;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-subtitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 11px 0;
+  display: block;
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input-wrapper .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; 
+}
+
+
+.search-input-wrapper input {
+  width: 85%; /*from 100%*/
+  height: 34px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding-left: 36px;
+  font-size: 15px;
+}
+
+.filter-divider {
+  border: none;
+  border-top: 1px solid #d9d9d9;
+  margin: 20px 0;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+}
+
+/* .checkbox-item input[type="checkbox"] {
+  display: none;
+} */
+
+.checkbox-item input[type="checkbox"] {
+  display: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.checkbox-item .custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 3px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* .checkbox-item .custom-checkbox {
+  width: 18px;
+  height: 18px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .checkbox-item .custom-checkbox img {
+  width: 24px;
+  height: 24px;
+  display: none;
+} */
+
+/* .checkbox-item .custom-checkbox i {
+  width: 24px;
+  height: 24px;
+  display: none;
+} */
+
+/* .checkbox-item input[type="checkbox"]:checked + label .custom-checkbox {
+  display: block;
+} */
+
+
+/* checked */
+.checkbox-item input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* add checkmark */
+.checkbox-item input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.search-results-btn {
+  margin-top: 20px;
+  height: 35px;
+  background-color: var(--background-white);
+  border: 1px solid var(--secondary-color);
+  border-radius: 50px;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.search-results-btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+}
+
+.job-listings {
+  padding: 27px 45px;
+}
+
+.main-search-form {
+  display: flex;
+  width: 100%;
+  max-width: 435px;
+  margin-bottom: 40px;
+  background-color: var(--background-light);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  height: 51px;
+}
+
+.main-search-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  padding: 0 24px;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.main-search-input:focus {
+  outline: none;
+}
+
+.main-search-btn {
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 0 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  margin: 5px;
+  width: 91px;
+}
+
+.job-filter-form {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  background-color: var(--background-white);
+  box-shadow: var(--shadow);
+}
+
+
+.job-listings h5{
+  margin-bottom: 6px;
+} 
+
+.job-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.job-card {
+  background-color: var(--background-white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.employment-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.employment-tag.full-time {
+  background-color: #b7dfc2;
+  border-color: #237138;
+  color: #237138;
+}
+
+.employment-tag.part-time {
+  background-color: #c1bee3;
+  border-color: #0a008f;
+  color: #0a008f;
+}

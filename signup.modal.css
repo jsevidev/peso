@@ -1,0 +1,217 @@
+/* ===== Modal shell (generic) ===== */
+.modal[aria-hidden="true"] { display: none; }
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+}
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+.modal__dialog {
+  position: relative;
+  max-width: 840px;
+  margin: 6vh auto;
+  background: #fffbfb;
+  border-radius: 16px;
+  box-shadow: 0 15px 60px rgba(0,0,0,.35);
+  outline: none;
+  animation: pop .18s ease-out;
+}
+@keyframes pop {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 40px;
+}
+body.modal-open { overflow: hidden; }
+
+/* ===== Namespaced copy of your signup CSS ===== */
+/* (Everything is prefixed with `.modal` so it only applies inside the popup.) */
+
+.modal .signup-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* The page background/body rules from your original CSS are intentionally NOT applied globally */
+  padding: 40px 20px; /* from body padding */
+}
+
+.modal .signup-card {
+  background-color: #fffbfb;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 48px 38px;
+  max-width: 792px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal .title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #333333;
+  text-align: center;
+  margin: 0;
+}
+
+.modal .login-prompt {
+  margin-top: 8px;
+  margin-bottom: 37px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333333;
+}
+.modal .login-prompt a {
+  font-weight: 700;
+  color: #111111;
+  text-decoration: underline;
+}
+
+.modal .signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal .form-group { display: flex; flex-direction: column; }
+.modal .form-group label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  color: #666666;
+}
+.modal .form-group input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid rgba(102, 102, 102, 0.35);
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin-top: 4px;
+}
+.modal .form-group input::placeholder { color: rgba(102, 102, 102, 0.6); }
+
+.modal .password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+.modal .hide-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: rgba(102, 102, 102, 0.8);
+}
+.modal .hide-btn img { width: 18px; height: 16px; }
+
+.modal .password-hint {
+  margin: 4px 0 0 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #666666;
+}
+
+.modal .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  align-self: center;
+}
+.modal .btn-primary {
+  max-width: 565px;
+  height: 58px;
+  background-color: #eb6935;
+  color: #ffffff;
+  border-radius: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  margin-top: 49px;
+}
+.modal .divider-container {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  width: 100%;
+  max-width: 580px;
+  margin: 21px 0 29px;
+}
+.modal .divider-line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: rgba(102, 102, 102, 0.25);
+}
+.modal .divider-text {
+  font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  color: #111111;
+}
+.modal .btn-secondary {
+  max-width: 580px;
+  height: 64px;
+  background-color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 40px;
+  gap: 16px;
+  font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  color: #333333;
+}
+.modal .btn-secondary img { width: 24px; height: 24px; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .modal .signup-card { padding: 32px 24px; }
+  .modal .title { font-size: 28px; }
+  .modal .btn-primary { font-size: 24px; height: 52px; }
+  .modal .btn-secondary { height: 56px; font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .modal .signup-section { padding: 24px 12px; }
+  .modal .signup-card {
+    padding: 28px 18px;
+    border-radius: 12px; /* keep popup rounded even on mobile */
+    box-shadow: none;
+    min-height: auto;
+  }
+  .modal .title { font-size: 24px; }
+  .modal .btn-primary { font-size: 20px; height: 50px; }
+}
+
+/* Nice focus ring inside the modal for accessibility */
+.modal :where(a,button,input,select,textarea):focus {
+  outline: 3px solid #0a66ff;
+  outline-offset: 2px;
+}

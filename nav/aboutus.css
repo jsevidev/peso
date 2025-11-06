@@ -1,0 +1,347 @@
+:root {
+  --primary-orange: #eb6935;
+  --primary-blue: #0a008f;
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --background-light: #f3f7fa;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}
+
+/* .container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+  box-sizing: border-box;
+} */
+
+section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+h1, h2, h3, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+/* ==================================
+   HEADER STYLES REMOVED BELOW
+   ================================== */
+
+/* (All .site-header, .header-container, .brand-logo,
+   .logo-img, .brand-name, .main-navigation, .auth-buttons,
+   .login-link, .signup-btn, and related media queries removed) */
+
+
+/* ==================================
+   HERO SECTION (kept)
+   ================================== */
+
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 440px;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 85px;
+  color: var(--text-dark);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.hero-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 85px;
+  color: var(--text-dark);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 300px;
+  }
+  .hero-title {
+    font-size: 48px;
+    line-height: 1.2;
+  }
+  .hero-subtitle {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+}
+
+
+/* ==================================
+   INTRO SECTION
+   ================================== */
+
+.intro-section {
+  background-color: var(--background-light);
+}
+.intro-container {
+  max-width: 1319px;
+  display: flex;
+  flex-direction: column;
+  gap: 57px;
+  text-align: center;
+}
+.intro-container p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  .intro-container p {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
+
+/* ==================================
+   WHAT WE DO SECTION
+   ================================== */
+
+.what-we-do-container {
+  display: flex;
+  align-items: center;
+  gap: 91px;
+}
+.what-we-do-text {
+  flex: 1;
+  max-width: 603px;
+}
+.what-we-do-text .section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 35px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 83px;
+  text-align: center;
+}
+.what-we-do-text ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+.what-we-do-text li {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  text-align: justify;
+  list-style-type: disc;
+}
+.what-we-do-image {
+  flex: 1;
+  max-width: 585px;
+}
+.what-we-do-image img {
+  width: 100%;
+  height: auto;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 992px) {
+  .what-we-do-container {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+  .what-we-do-text .section-title {
+    margin-bottom: 30px;
+  }
+}
+
+
+/* ==================================
+   COMMITMENT SECTION
+   ================================== */
+
+.commitment-section {
+  padding-top: 68px;
+}
+.commitment-container {
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.commitment-container .section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 35px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 21px;
+}
+.commitment-container .commitment-intro {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  text-align: justify;
+  margin-bottom: 13px;
+}
+.commitment-container ul {
+  padding-left: 20px;
+  text-align: left;
+}
+.commitment-container li {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  text-align: justify;
+  list-style-type: disc;
+}
+
+
+/* ==================================
+   PARTNERSHIP SECTION
+   ================================== */
+
+.partnership-section {
+  padding-top: 100px;
+}
+.partnership-container {
+  max-width: 1129px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.partnership-container .section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 35px;
+  text-align: center;
+}
+.partnership-container p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  text-align: justify;
+}
+.partnership-container ul {
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.partnership-container li {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 35px;
+  text-align: justify;
+  list-style-type: disc;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.user-icon {
+  width: 70px;
+  height: 70px;
+}
+
+@media (max-width: 768px) {
+  .partnership-container .section-title {
+    font-size: 32px;
+    line-height: 1.3;
+  }
+  .partnership-container p,
+  .partnership-container li {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}

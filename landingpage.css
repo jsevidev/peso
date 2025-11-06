@@ -1,0 +1,245 @@
+:root {
+  --brand-orange: #eb6935;
+  --brand-blue: #0a008f;
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --bg-light: #f3f7fa;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+
+  .site-header {
+    background-color: var(--brand-orange);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: var(--text-light);
+    height: 113px;
+  }
+
+  .header-container {
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 2.7%; /* Approx 39px on 1440px */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+  }
+
+  .logo img {
+    width: 86px;
+    height: 86px;
+  }
+
+  .logo-text {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 52px;
+  }
+
+  .main-navigation {
+    display: flex;
+    gap: 21px;
+  }
+
+  .main-navigation a {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .btn-post-fairs {
+    background-color: var(--brand-blue);
+    border-radius: 25px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 6.5px 22px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  .auth-link {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  @media (max-width: 1200px) {
+    .main-navigation {
+      display: none; 
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      justify-content: space-between;
+    }
+    .logo-text {
+      display: none;
+    }
+    .header-actions .auth-link {
+      display: none;
+    }
+  }
+
+
+
+  .hero-section {
+    width: 100%;
+  }
+
+  .hero-section .page-wrapper {
+    position: relative;
+    background-color: var(--bg-light);
+  }
+
+  .decorative-overlays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .deco-shape {
+    position: absolute;
+    transform: rotate(14.92deg);
+  }
+
+  .shape-1 {
+    left: 39.2%;
+    top: -17.5%;
+    width: 88%;
+    height: 146.5%;
+    box-shadow: 0px 0px 100px 0px var(--brand-orange);
+  }
+
+  .shape-2 {
+    left: 57.3%;
+    top: -17.5%;
+    width: 42.6%;
+    height: 33.7%;
+  }
+
+  .shape-3 {
+    left: 36.5%;
+    top: 71.3%;
+    width: 76.8%;
+    height: 80.4%;
+  }
+
+  .hero-content {
+    display: flex;
+    min-height: calc(100vh - 113px);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .employer-panel {
+    position: relative;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+  .employer-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-light);
+    opacity: 0.85;
+    z-index: 1;
+  }
+
+  .panel-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .panel-title {
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 85px;
+    color: var(--text-dark);
+    margin: 0 0 75px 0;
+  }
+
+  .btn-action {
+    display: inline-block;
+    background-color: var(--brand-blue);
+    color: var(--text-light);
+    border-radius: 25px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 6.5px 22px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 992px) {
+    .hero-content {
+      flex-direction: column;
+      min-height: auto;
+    }
+    .hero-panel {
+      min-height: 400px;
+    }
+    .panel-title {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    .decorative-overlays {
+      display: none; /* Complex overlays are hard to manage on mobile, simplifying */
+    }
+  }

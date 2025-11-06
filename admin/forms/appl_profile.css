@@ -1,0 +1,236 @@
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* PROFILE MODAL STYLES */
+#applicant-profile {
+    /* Fixed position to cover the entire viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Dark overlay (the background) */
+    background-color: rgba(0, 0, 0, 0.5); 
+    
+    /* Center the form container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* HIDE the form by default */
+    visibility: hidden; 
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+    
+    /* Ensure it's above all other content */
+    z-index: 10000; /* Higher than add applicant modal */
+}
+
+#applicant-profile.show {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 0.3s ease;
+}
+
+.applicant-profile-card {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%; 
+    max-width: 839px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+#applicant-profile.show .applicant-profile-card {
+    transform: translateY(0);
+}
+
+/* Rest of your existing styles remain mostly the same */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 31px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 30px 30px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.profile-title {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: #000000;
+    letter-spacing: 0.5px;
+}
+
+.close-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 17px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s;
+}
+
+.close-button:hover {
+    background-color: #f5f5f5;
+}
+
+.profile-body {
+    padding: 27px 60px 40px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 43px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #000000;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: 2px solid #0a008f;
+    outline-offset: 1px;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #000000;
+    pointer-events: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.save-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #f3f7fa;
+    background-color: #0a008f;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 21px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-button:hover {
+    background-color: #1c12a8;
+}
+
+/* Make eye icon clickable */
+.action-icons a.view-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.action-icons a.view-profile-btn:hover i {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .profile-body {
+        padding: 20px;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .form-actions {
+        margin-top: 20px;
+    }
+    
+    .applicant-profile-card {
+        width: 95%;
+        margin: 20px;
+    }
+}
