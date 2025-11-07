@@ -4,13 +4,85 @@
         include '../config.php';
         include '../header/header.php';
         session_start();
-    ?>
+
+    $appl_id = $_SESSION['applicant_id'] ?? null;
+    $row = [];
+
+if ($appl_id) {
+    $stmt = $mysqli->prepare("SELECT * FROM applicant_profile WHERE appl_id = ?");
+    $stmt->bind_param("i", $appl_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+}
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $appl_id = $_SESSION['applicant_id'] ?? null;  // assuming this is set on login
+
+    $full_name = $_POST['full-name'] ?? '';
+    $date_of_birth = $_POST['posted-date'] ?? null;
+    $gender = $_POST['gender'] ?? '';
+    $contact_no = $_POST['contact-no'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $current_address = $_POST['current-address'] ?? '';
+    $education = $_POST['education-basic'] ?? '';
+    $skills = $_POST['skills'] ?? '';
+    $work_experience = $_POST['work-experience'] ?? '';
+
+    if ($appl_id) {
+        $stmt = $mysqli->prepare("
+            UPDATE applicant_profile
+            SET 
+                full_name = ?, 
+                date_of_birth = ?, 
+                gender = ?, 
+                contact_no = ?, 
+                email = ?, 
+                current_address = ?, 
+                education = ?, 
+                skills = ?, 
+                work_experience = ?
+            WHERE appl_id = ?
+        ");
+
+        if (!$stmt) {
+            die("Prepare failed: " . $mysqli->error);
+        }
+
+        $stmt->bind_param(
+            "sssssssssi",
+            $full_name,
+            $date_of_birth,
+            $gender,
+            $contact_no,
+            $email,
+            $current_address,
+            $education,
+            $skills,
+            $work_experience,
+            $appl_id
+        );
+
+        if ($stmt->execute()) {
+            echo "<script>console.log('✅ Profile updated successfully');</script>";
+        } else {
+            echo "<script>console.error('❌ Update failed: " . $stmt->error . "');</script>";
+        }
+
+        $stmt->close();
+    } else {
+        echo "<script>console.warn('⚠️ Missing applicant ID in session');</script>";
+    }
+}
+?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="appl_profile.css">
+    <link rel="stylesheet" href="form/edit_profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
@@ -29,10 +101,10 @@
             </div>
 
             <nav class="sidebar-menu">
-            <a href="#" class="sidebar-button">
+            <button class="sidebar-button edit-profile-btn">
                 <i class="fa-regular fa-pen-to-square" alt=""></i> 
                 <span>EDIT PROFILE</span>
-            </a>
+            </button>
             <a href="#" class="sidebar-button"><span>VERIFICATION</span></a>
             <a href="#" class="sidebar-button"><span>REFFERAL</span></a>
             <a href="#" class="sidebar-button"><span>UPLOAD RESUME</span></a>
@@ -123,5 +195,100 @@
         </div>
     </div>
     </section>
+
+
+
+    <!-- Edit Profile Form -->
+    <section id="edit-profile" class="edit-profile-container">
+    <div class="profile-modal">
+        <header class="modal-header">
+        <h1 class="header-title">Edit Profile</h1>
+        <button class="close-btn">CLOSE</button>
+        </header>
+        <main class="modal-body">
+
+        <form class="profile-form">
+            <h2 class="section-title col-span-2">Basic Information</h2>
+
+            <div class="form-field">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full-name">
+            </div>
+
+            <div class="form-field">
+            <label for="posted-date">Birthdate</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="posted-date" 
+                        name="posted-date" 
+                        value="<?php echo htmlspecialchars($row['date_of_birth'] ?? '', ENT_QUOTES); ?>">
+                    <i class="fa-regular fa-calendar-days" alt="Calendar icon" class="input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-field">
+            <label for="gender">Gender</label>
+            <div class="select-wrapper">
+                <select id="gender" name="gender">
+                <option value=""></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="form-field">
+            <label for="contact-no">Contact No.</label>
+            <input type="tel" id="contact-no" name="contact-no">
+            </div>
+
+            <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-field">
+            <label for="education-basic">Education</label>
+            <input type="text" id="education-basic" name="education-basic">
+            </div>
+
+            <div class="form-field col-span-2">
+            <label for="current-address">Current Address</label>
+            <input type="text" id="current-address" name="current-address">
+            </div>
+
+            <h2 class="section-title col-span-2">Education</h2>
+
+            <div class="form-field col-span-2">
+            <input type="text" id="education-main" name="education-main" aria-label="Education">
+            </div>
+
+            <div class="form-field">
+            <label for="skills">Skills</label>
+            <input type="text" id="skills" name="skills">
+            </div>
+
+            <div class="form-field">
+            <label for="work-experience">Work Experience</label>
+            <div class="select-wrapper">
+                <select id="work-experience" name="work-experience">
+                <option value=""></option>
+                <option value="entry">Entry Level</option>
+                <option value="mid">Mid Level</option>
+                <option value="senior">Senior Level</option>
+                </select>
+            </div>
+            </div>
+        </form>
+        </main>
+        <footer class="modal-footer">
+        <button type="submit" form="profile-form" class="save-btn">SAVE</button>
+        </footer>
+    </div>
+    </section>   
+
+    <script src="edit_profile.js"></script>
 </body>
+
 </html>
