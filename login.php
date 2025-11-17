@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'config.php';
-session_start();
 
 if (isset($_POST['login'])) {
-    //connect to database
-    $mysqli = new mysqli("localhost", "root", "", "peso");
 
+    $mysqli = new mysqli("localhost", "root", "", "peso");
     if ($mysqli->connect_error) {
         die("Connection failed: " . $mysqli->connect_error);
     }
@@ -15,31 +16,82 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    //check if account exists
+    /* -------------------------
+       1. CHECK ADMIN (Plain)
+       ------------------------- */
+    $stmt = $mysqli->prepare("SELECT * FROM admin WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $admin = $stmt->get_result();
+
+    if ($admin->num_rows === 1) {
+        $row = $admin->fetch_assoc();
+
+        if ($password == $row['password']) {
+
+            $_SESSION['admin_id'] = $row['admin_id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['role'] = "admin";
+
+            header("Location: admin/dashboard.php");
+            exit();
+        }
+    }
+
+
+    /* -------------------------
+       2. CHECK APPLICANT (Hashed)
+       ------------------------- */
     $stmt = $mysqli->prepare("SELECT * FROM applicant_account WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $appl = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        //use password_verify to check hashed passwords
-        if (password_verify($password, $row['password'])) { 
-            $_SESSION['email'] = $email;
-            error_log("Login successful, redirecting...");
-            header("Location: home.php");
+    if ($appl->num_rows === 1) {
+        $row = $appl->fetch_assoc();
+
+        if (password_verify($password, $row['password'])) {
+
+            $_SESSION['applicant_id'] = $row['appl_id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['role'] = "applicant";
+
+            header("Location: appl_profile/appl_profile.php");
             exit();
-        } else {
-            $error = "Invalid username or password!";
         }
-    } else {
-        $error = "Invalid username or password!";
     }
 
-    $stmt->close();
+
+    /* -------------------------
+       3. CHECK EMPLOYER (Hashed)
+       ------------------------- */
+    $stmt = $mysqli->prepare("SELECT * FROM employers_acc WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $emp = $stmt->get_result();
+
+    if ($emp->num_rows === 1) {
+        $row = $emp->fetch_assoc();
+
+        if (password_verify($password, $row['password'])) {
+
+            $_SESSION['employer_id'] = $row['employer_id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['role'] = "employer";
+
+            header("Location: employer/emp_job_posting.php");
+            exit();
+        }
+    }
+
+    /* Failed login */
+    $error = "Invalid username or password!";
+
+    if (isset($stmt)) $stmt->close();
     $mysqli->close();
 }
 ?>
+
     
 <head>
     <meta charset="UTF-8">
@@ -76,21 +128,21 @@ if (isset($_POST['login'])) {
         </div>
 
         <div class="social-login">
-        <a href="#" class="social-btn">
+        <!-- <a href="#" class="social-btn">
             <i class="fa-brands fa-google" alt="Google-logo"></i>
             <span>Continue with Google</span>
-        </a>
-        <a href="#" class="social-btn">
+        </a> -->
+        <!-- <a href="#" class="social-btn">
             <i class="fa-brands fa-facebook" alt="Facebook icon"></i>
             <span>Continue with Facebook</span>
-        </a>
+        </a> -->
         </div>
 
-        <div class="divider">
+        <!-- <div class="divider">
         <span class="divider-line"></span>
         <span class="divider-text">OR</span>
         <span class="divider-line"></span>
-        </div>
+        </div> -->
 
         <form method="POST" action="" class="login-form"  >
         <div class="form-group">
@@ -120,6 +172,11 @@ if (isset($_POST['login'])) {
 
         <!-- change to button type="submit" for validation of account -->
         <button type="submit" class="btn btn-main-login" name="login">Login</button>
+        <?php 
+            if (isset($error)) {
+                echo "<p style='color:red; margin-top:10px; text-align:center;'>$error</p>";
+            }
+        ?>
         </form>
     </div>
     </main>

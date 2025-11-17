@@ -43,7 +43,7 @@ h1, h2, p {
   margin: 0;
 }
 
-
+/* Header */
 .site-header {
     background-color: var(--primary-orange);
     box-shadow: var(--shadow-dark);
@@ -119,26 +119,12 @@ h1, h2, p {
     font-size: 15px;
 }
 
-.notification-button img {
+/* .notification-button i {
     width: 40px;
     height: 40px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
+} */
 
-.admin-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 112px;
-    height: 49px;
-    background-color: var(--primary-blue);
-    color: var(--white);
-    border-radius: 100px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    box-shadow: var(--shadow-dark);
-}
 
 @media (max-width: 1200px) {
     .site-header {
@@ -168,10 +154,6 @@ h1, h2, p {
     .site-header {
         padding: 15px;
     }
-    .logo-container {
-        width: 100%;
-        justify-content: center;
-    }
     .site-title {
         display: none;
     }
@@ -186,20 +168,18 @@ h1, h2, p {
     .notification-button {
         order: 2;
     }
-    .admin-button {
-        order: 3;
-    }
 }
 
 
-
+/* Apply this to other pages */
 .dashboard-body {
     display: flex;
     /* max-width: 1440px;
     margin: 0 auto; */
-    min-height: calc(1024px - 113px); /* Figma height - header height */
+    min-height: calc(100vh - 113px); /* Figma height - header height */
 }
 
+/* SIDEBAR */
 .sidebar {
     flex-shrink: 0;
     width: 346px;
@@ -248,11 +228,8 @@ h1, h2, p {
     color: var(--black);
 }
 
-.logout-button img {
-    width: 30px;
-    height: 30px;
-}
 
+MAIN CONTENT
 .main-content {
     flex-grow: 1;
     padding: 63px 40px;

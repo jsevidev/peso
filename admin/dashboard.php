@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
 <?php
-include '../config.php';
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    }
+    include '../config.php';
+    include '../header/admin_header.php';
 
 
 $mysqli = new mysqli("localhost", "root", "", "peso");
@@ -35,14 +37,13 @@ if ($result_employers) {
     $total_employers = 'Error'; // Handle database query error
 }
 
+// --- 3. Get Total Jobs Filled (Total Job Postings) ---
+$sql_jobs_filled = "SELECT COUNT(*) AS total_jobs FROM job_posting";
+$result_jobs_filled = $mysqli->query($sql_jobs_filled);
+$jobs_filled = $result_jobs_filled ? $result_jobs_filled->fetch_assoc()['total_jobs'] : 'Error';
+
 // Close connection (optional, but good practice if done early)
 $mysqli->close();
-
-// Placeholder variables for the remaining cards (to avoid errors)
-$active_jobs = '0';
-$jobs_filled = '0';
-
-
 
 ?>
 
@@ -55,7 +56,7 @@ $jobs_filled = '0';
         <script src="script.js"></script>  
 </head>
 
-    <header class="site-header">
+    <!-- <header class="site-header">
         <div class="header-container">
             <div class="logo-container">
                 <img src="../PESO_logo.png" alt="PESO Logo" class="logo-img">
@@ -71,12 +72,12 @@ $jobs_filled = '0';
                 </button>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <body>
         
-    <section class="dashboard-body">
-        <aside class="sidebar">
+    <!-- <section class="dashboard-body"> -->
+        <!-- <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul>
                     <li class="active"><a href="#">Dashboard</a></li>
@@ -92,7 +93,7 @@ $jobs_filled = '0';
                 <span>Logout</span>
                 <i class="fa-solid fa-arrow-right-from-bracket fa-lg" alt="Logout icon"></i>
             </a>
-        </aside>
+        </aside> -->
         <main class="main-content">
             <div class="stats-grid">
                 <article class="stat-card">
@@ -103,10 +104,10 @@ $jobs_filled = '0';
                     <h2 class="stat-title">Total Employers</h2>
                     <p class="stat-number"><?php echo $total_employers; ?></p>
                 </article>
-                <article class="stat-card">
+                <!-- <article class="stat-card">
                     <h2 class="stat-title">Active Jobs</h2>
                     <p class="stat-number"><?php echo $active_jobs; ?></p>
-                </article>
+                </article> -->
                 <article class="stat-card">
                     <h2 class="stat-title">Jobs Filled</h2>
                     <p class="stat-number"><?php echo $jobs_filled; ?></p>

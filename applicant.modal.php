@@ -88,17 +88,6 @@ if (isset($_POST['signup'])) {
             <!-- Important: "name=signup" matches PHP if-check -->
             <button type="submit" name="signup" class="btn btn-primary">Create Account</button>
           </form>
-
-          <div class="divider-container">
-            <div class="divider-line"></div>
-            <span class="divider-text">OR</span>
-            <div class="divider-line"></div>
-          </div>
-
-          <a href="#" class="btn btn-secondary">
-            <img src="${ASSET_PATH}/I331_1222_2_979.svg" alt="Google logo" aria-hidden="true">
-            <span>Continue with Google</span>
-          </a>
         </div>
       </section>
       <!-- ================== /APPLICANT SIGN-UP ================== -->

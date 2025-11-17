@@ -1,0 +1,280 @@
+:root {
+  --primary-orange: #eb6935;
+  --primary-blue: #0a008f;
+  --background-light: #f3f7fa;
+  --white: #ffffff;
+  --text-dark: #000000;
+  --text-light: #ffefef;
+  --button-bg-light: #fffafa;
+  --dropzone-bg: rgba(217, 217, 217, 0.51);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+
+  .site-header {
+    background-color: var(--primary-orange);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: var(--white);
+    padding: 14px 29px;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 33px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 33px;
+  }
+
+  .brand-logo {
+    width: 86px;
+    height: 86px;
+  }
+
+  .brand-name {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 52px;
+  }
+
+  .main-nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 33px;
+  }
+
+  .main-nav a {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .user-avatar {
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+
+  .user-avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .user-name {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+  }
+
+  @media (max-width: 1200px) {
+    .main-nav {
+      display: none; /* Example: hide nav on smaller screens */
+    }
+    .header-left {
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .header-left {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .brand-name {
+      font-size: 32px;
+    }
+  }
+
+
+
+  .resume-upload-content {
+    padding: 40px 81px 50px; /* Top: 1415-1375=40, Sides: 1053-966=87, Bottom: 2286-2234=52 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .upload-card {
+    background-color: var(--white);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 1279px;
+    padding: 20px 78px 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .upload-title {
+    color: var(--primary-blue);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 32px 0;
+  }
+
+  .upload-subtitle {
+    color: var(--primary-blue);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    margin: 0 0 97px 0;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .drop-zone {
+    background-color: var(--dropzone-bg);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1123px;
+    height: 296px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 19px;
+    padding: 20px 202px 88px;
+  }
+
+  .drop-zone-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .drop-zone-text {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  .choose-file-btn {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border: none;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    padding: 8px 36px;
+    cursor: pointer;
+  }
+
+  .back-button-container {
+    width: 100%;
+    max-width: 1279px;
+    margin-top: 220px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .back-to-profile-btn {
+    background-color: var(--button-bg-light);
+    border: 1px solid var(--primary-blue);
+    border-radius: 50px;
+    color: var(--primary-blue);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 32px;
+    padding: 11px 11px;
+    text-align: center;
+    min-width: 255px;
+  }
+
+  @media (max-width: 1024px) {
+    .resume-upload-content {
+      padding: 30px 40px;
+    }
+    .upload-card {
+      padding: 20px 40px 60px;
+    }
+    .upload-title {
+      font-size: 36px;
+    }
+    .upload-subtitle {
+      font-size: 20px;
+      margin-bottom: 60px;
+    }
+    .back-button-container {
+      margin-top: 100px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .resume-upload-content {
+      padding: 20px;
+    }
+    .upload-card {
+      padding: 20px;
+    }
+    .upload-title {
+      font-size: 28px;
+    }
+    .upload-subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+    .drop-zone {
+      height: auto;
+      padding: 30px 15px;
+    }
+    .back-button-container {
+      margin-top: 60px;
+      justify-content: center;
+    }
+    .back-to-profile-btn {
+      font-size: 24px;
+      padding: 10px 20px;
+    }
+  }

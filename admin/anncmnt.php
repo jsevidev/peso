@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="en">
 <?php
-include '../config.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    }
+    include '../config.php';
+    include '../header/admin_header.php';
 
 ?>
 <head>
@@ -13,45 +16,9 @@ session_start();
         <script src="script.js"></script>  
 </head>
 
-<header class="site-header">
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="../PESO_logo.png" alt="PESO Logo" class="logo-img">
-                <h1 class="site-title">PESO Ozamiz</h1>
-            </div>
-            <div class="header-controls">
-                <form class="search-form">
-                    <input type="search" class="search-input" placeholder="Search Something....">
-                    <button type="submit" class="search-button">Search</button>
-                </form>
-                <button class="notification-button">
-                    <i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;" alt="Notifications"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
 <body>
     
-<section class="dashboard-body">
-        <aside class="sidebar">
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="appl_list.php">Applicants</a></li>
-                    <li><a href="empl_list.php">Employers</a></li>
-                    <li><a href="job_posting.php">Job Posting</a></li>
-                    <li><a href="application.php">Applications</a></li>
-                    <li><a href="job_fair.php">Job Fairs</a></li>
-                    <li class="active"><a href="#">Announcements</a></li>
-                </ul>
-            </nav>
-            <a href="admin.php" class="logout-button">
-                <span>Logout</span>
-                <i class="fa-solid fa-arrow-right-from-bracket fa-lg" alt="Logout icon"></i>
-            </a>
-        </aside>
-
+<!-- <section class="dashboard-body"> -->
     <div class="main-panel">
         <main class="content-area" id="announcements">
         <section class="announcements-section">
@@ -64,10 +31,10 @@ session_start();
             </div>
 
             <div class="announcements-filters">
-            <div class="filter-search">
+            <!-- <div class="filter-search">
                 <input type="text" placeholder="Search a Jobs">
                 <button>Search</button>
-            </div>
+            </div> -->
             <div class="filter-dropdown">
                 <span>Audience</span>
                 <!--merged image-->
@@ -139,7 +106,6 @@ session_start();
             </div>
         </section>
         </main>
-    </div>
     </div>
 </body>
 

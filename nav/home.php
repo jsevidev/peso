@@ -2,9 +2,11 @@
 <html lang="en">
 
     <?php
-    include '../config.php';
-    include '../header/header.php';
+    if (session_status() === PHP_SESSION_NONE) {
     session_start();
+    }
+        include '../config.php';
+        include '../header/header.php';
     ?>
 
 <head>

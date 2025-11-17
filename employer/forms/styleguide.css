@@ -1,0 +1,9 @@
+:root {
+  --colorsblack: rgba(0, 0, 0, 1);
+  --title-3-font-family: "SF Pro", Helvetica;
+  --title-3-font-weight: 700;
+  --title-3-font-size: 19px;
+  --title-3-letter-spacing: 0px;
+  --title-3-line-height: 24px;
+  --title-3-font-style: normal;
+}

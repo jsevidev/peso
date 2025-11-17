@@ -1,8 +1,39 @@
 <!doctype html>
 <html lang="en">
 <?php
-include '../config.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    }
+    include '../config.php';
+    include '../header/admin_header.php';
+
+    // CONNECT TO DATABASE
+    $mysqli = new mysqli("localhost", "root", "", "peso");
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+
+    // FETCH APPLICATION LIST
+    $sql = "
+        SELECT 
+            a.application_id,
+            a.appl_profile_id,
+            a.job_id,
+            ap.full_name AS applicant_name,
+            jp.job_title,
+            e.company_name,
+            a.status
+        FROM applications a
+        LEFT JOIN applicant_profile ap 
+            ON a.appl_profile_id = ap.appl_profile_id
+        LEFT JOIN job_posting jp 
+            ON a.job_id = jp.job_id
+        LEFT JOIN employers e 
+            ON jp.employer_id = e.employer_id
+        ORDER BY a.application_id ASC
+    ";
+
+    $result = $mysqli->query($sql);
 
 ?>
 <head>
@@ -13,74 +44,37 @@ session_start();
         <script src="script.js"></script>  
 </head>
 
-<header class="site-header">
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="../PESO_logo.png" alt="PESO Log" class="logo-img">
-                <h1 class="site-title">PESO Ozamiz</h1>
-            </div>
-            <div class="header-controls">
-                <form class="search-form">
-                    <input type="search" class="search-input" placeholder="Search Something....">
-                    <button type="submit" class="search-button">Search</button>
-                </form>
-                <button class="notification-button">
-                    <i class="fa-solid fa-bell fa-2xl" style="color: #ffffff;" alt="Notifications"></i>
-                </button>
-                
-            </div>
-        </div>
-    </header>
-
-
 <body>
-    <section class="dashboard-body">
-        <aside class="sidebar">
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="appl_list.php">Applicants</a></li>
-                    <li><a href="empl_list.php">Employers</a></li>
-                    <li><a href="job_posting.php">Job Posting</a></li>
-                    <li class="active"><a href="#">Applications</a></li>
-                    <li><a href="job_fair.php">Job Fairs</a></li>
-                    <li><a href="anncmnt.php">Announcements</a></li>
-                </ul>
-            </nav>
-            <a href="admin.php" class="logout-button">
-                <span>Logout</span>
-                <i class="fa-solid fa-arrow-right-from-bracket fa-lg" alt="Logout icon"></i>
-            </a>
-        </aside>
-
+    <!-- <section class="dashboard-body"> -->
+    
         <div class="main-content-grid">
         <main class="main-content">
             <div class="content-header">
             <h2 class="content-title">Applications</h2>
             <div class="content-actions">
-                <a  href="forms/add_application.php" class="btn btn-primary btn-with-icon">
+                <!-- <a  href="forms/add_application.php" class="btn btn-primary btn-with-icon">
                     <i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i>
                     ADD APPLICATION
-                </a>
+                </a> -->
                 <button class="btn btn-primary">EXPORT</button>
             </div>
             </div>
             <div class="filter-bar">
-            <div class="filter-search">
+            <!-- <div class="filter-search">
                 <input type="text" placeholder="Search a Jobs">
                 <button class="btn btn-secondary">Search</button>
-            </div>
+            </div> -->
             <div class="filter-dropdown">
                 <span>Employer</span>
-                <img src="${ASSET_PATH}/238_923.svg" alt="dropdown arrow">
+                <i class="fa-solid fa-caret-down" style="color: #000000;" alt="dropdown arrow"></i>
             </div>
             <div class="filter-dropdown">
                 <span>Status</span>
-                <img src="${ASSET_PATH}/238_926.svg" alt="dropdown arrow">
+                <i class="fa-solid fa-caret-down" style="color: #000000;" alt="dropdown arrow"></i>
             </div>
             <div class="filter-date">
                 <span>Date</span>
-                <img src="${ASSET_PATH}/238_929.svg" alt="calendar icon">
+                <i class="fa-solid fa-caret-down" style="color: #000000;" alt="dropdown arrow"></i>
             </div>
             </div>
             <div class="table-wrapper">
@@ -92,39 +86,51 @@ session_start();
                     <th>Job Title</th>
                     <th>Employer</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                 </tr>
                 </thead>
+
                 <tbody>
-                <tr>
-                    <td class="row-index">1</td>
-                    <td>Maria Santos</td>
-                    <td>Service Crew</td>
-                    <td>Jollibee</td>
-                    <td class="status-pending">Pending</td>
-                    <td>
-                    <div class="action-links">
-                        <a href="#">Update Status</a>
-                        <a href="#">Match to Job</a>
-                        <a href="#">Export</a>
-                    </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="row-index">2</td>
-                    <td>Juan Dela Cruz</td>
-                    <td>Cashier</td>
-                    <td>McDonald’s</td>
-                    <td class="status-interview">Interview</td>
-                    <td>
-                    <div class="action-links">
-                        <a href="#">Update Status</a>
-                        <a href="#">Match to Job</a>
-                        <a href="#">Export</a>
-                    </div>
-                    </td>
-                </tr>
+                    <?php
+                    $counter = 1;
+
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+
+                            // Status CSS Classes
+                            $statusClass = "";
+                            if ($row['status'] === "Pending") $statusClass = "status-pending";
+                            if ($row['status'] === "Interview") $statusClass = "status-interview";
+                            if ($row['status'] === "Rejected") $statusClass = "status-rejected";
+                            if ($row['status'] === "Hired") $statusClass = "status-hired";
+                            ?>
+                            
+                            <tr>
+                                <td class="row-index"><?= $counter ?></td>
+                                <td><?= $row['applicant_name'] ?></td>
+                                <td><?= $row['job_title'] ?></td>
+                                <td><?= $row['company_name'] ?></td>
+                                <td class="<?= $statusClass ?>"><?= $row['status'] ?></td>
+
+                                <!-- <td>
+                                    <div class="action-links">
+                                        <a href="update_status.php?id=<?= $row['application_id'] ?>">Update Status</a>
+                                        <a href="match_job.php?id=<?= $row['application_id'] ?>">Match to Job</a>
+                                        <a href="export_application.php?id=<?= $row['application_id'] ?>">Export</a>
+                                    </div>
+                                </td> -->
+                            </tr>
+
+                            <?php
+                            $counter++;
+                        }
+                    } else { ?>
+                        <tr>
+                            <td colspan="6" style="text-align:center;">No applications found.</td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
+
             </table>
             </div>
         </main>

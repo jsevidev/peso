@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    }
         include '../config.php';
         include '../header/header.php';
-        session_start();
     ?>
 
 <head>
@@ -132,13 +134,14 @@
                         $caption = htmlspecialchars($row['caption']);
 
                         // Convert "Full Time" → "full-time"
-                        $employment_class = strtolower(str_replace(' ', '-', $employment_type));
+                        $employment_class = strtolower(str_replace(' ', '-', $employment_type)); // Convert "Full Time" to "full-time" for the class
+                        $employment_tag_class = ($employment_type == 'Full Time') ? 'full-time' : 'part-time'; // Assign the class dynamically
 
                         echo "
-                        <article class='job-card'>
+                        <article class='job-card' onclick='openApplyModal({$row['job_id']})'>
                             <header class='job-card-header'>
                                 <h4 class='job-title'>{$job_title}</h4>
-                                <span class='employment-tag {$employment_class}'>{$employment_type}</span>
+                                <span class='employment-tag {$employment_tag_class}'>{$employment_type}</span>
                             </header>
                             <p class='job-meta'> 
                                 <span class='company-name'>{$company_name} • </span>
@@ -157,46 +160,57 @@
                             </div>
                         </article>
                         ";
+                        
                     }
                 } else {
                     echo "<p>No job listings found.</p>";
                 }
 
+                // Fetch logged-in applicant details
+                        if (isset($_SESSION['applicant_id'])) {
+                            $applicant_id = $_SESSION['applicant_id'];
+
+                            $sql = "SELECT * FROM applicant_profile WHERE appl_profile_id = ?";
+                            $stmt = $mysqli->prepare($sql);
+                            $stmt->bind_param("i", $applicant_id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            if ($result->num_rows > 0) {
+                                $applicant = $result->fetch_assoc();
+                                // Store applicant details
+                                $full_name = htmlspecialchars($applicant['full_name']);
+                                $email = htmlspecialchars($applicant['email']);
+                                $contact_number = htmlspecialchars($applicant['contact_no']);
+                            }
+                        }
+
+
                 // --- CLOSE CONNECTION ---
                 $mysqli->close();
                 ?>
-
-
-
-            <!-- <article class="job-card">
-            //     <header class="job-card-header">
-            //         <h4 class="job-title">Service Crew for Jollibee</h4>
-            //         <span class="employment-tag full-time">Full Time</span>
-            //     </header>
-            //         <p class="job-meta">
-            //             <span class="company-name">Jollibee Ozamiz • </span>
-            //             <i class="post-date">Posted on Oct 01, 2025</i>
-            //         </p>
-
-            //         <p class="job-salary">₱12,000 - ₱15,000 / month</p>
-
-            // <div class="job-details">
-            //     <h5>About Us</h5>
-            //         <p>Jollibee Ozamiz is looking for energetic and hardworking Service Crew Members to join our team. Your role is to provide excellent customer service, assist in food preparation, and maintain cleanliness in the store.</p>
-            // </div>
-
-            // <div class="job-skills">
-            //     <h5>Skills</h5>
-            //         <div class="skill-tags">
-            //             <span class="skill-tag">Service Crew</span>
-            //             <span class="skill-tag">Cashier</span>
-            //         </div>
-            // </div>
-            // </article> -->
-
         </div>
         </main>
+        </form>
     </div>
     </section>
+
+    <!-- Apply Form Modal -->
+<!-- <div id="apply-modal" class="apply-modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close-button">&times;</span>
+        <h2>Apply for Job</h2>
+        Include your external apply form here 
+        <iframe src="apply_form.php" id="apply-iframe" name="apply-form" frameborder="0"></iframe>
+    </div>
+</div> -->
+
+
+
+
+
+
+    <script src="modal/modal.js"></script>
+
 </body>
 </html>

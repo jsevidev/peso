@@ -147,6 +147,99 @@ body {
   transition: all 0.2s ease;
 }
 
+/* APPLY JOB */
+/* Job Listing Specific Styles */
+.joblisting-apply-modal {
+    /* max-width: 839px;
+    margin: 50px auto;
+    background-color: var(--bg-white);
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fixed positioning to center it within the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Slight dark overlay */
+    z-index: 1000;
+}
+
+.joblisting-application-form {
+    /* width: 326px;
+    flex-shrink: 0;
+    padding: 11px 33px 39px;
+    background-color: var(--bg-white);
+    border-radius: 0px 0px 30px 0px; */
+    width: 100%;
+    max-width: 500px; /* Set max width for the form */
+    padding: 20px;
+    background-color: var(--bg-white);
+    border-radius: 15px;
+}
+
+.joblisting-apply-modal .modal-body {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 840px; /* Set a max width for the modal */
+    width: 100%;
+    background-color: var(--bg-white);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep the existing apply form styles intact but scoped for joblisting */
+.joblisting-application-form .form-group {
+    /* margin-bottom: 4px; */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.joblisting-application-form .submit-button {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+    cursor: pointer;
+    margin-top: 44px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
+    line-height: 25px;
+    padding: 0;
+}
+
+/* Center the submit button */
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+    background-color: #eb6935;
+}
+
+
 /* .checkbox-item .custom-checkbox {
   width: 18px;
   height: 18px;

@@ -1,6 +1,12 @@
+<!-- <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?> -->
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/PESO/css/header.css">
+    <link rel="stylesheet" href="../header/css/header.css">
 </head>
 
 <header class="site-header">
@@ -18,10 +24,16 @@
     </nav>
 
     <div class="user-profile">
-        <a href="../appl_profile/appl_profile.php" class="user-name" class="<?= basename($_SERVER['PHP_SELF']) == 'appl_profile.php' ? 'active' : '' ?>">Alvin</a>
-        <!-- <span class="user-name" onclick="window.location.href='appl_profile.php'">Alvin</span> -->
-        <i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i>
-   
+      <?php if (isset($_SESSION['employer_name'])): ?>
+          <a href="../appl_profile/appl_profile.php" 
+            class="user-name <?= basename($_SERVER['PHP_SELF']) == 'appl_profile.php' ? 'active' : '' ?>">
+            <?= htmlspecialchars($_SESSION['applicant_name'] ?? 'User'); ?>
+          </a>
+        <?php else: ?>
+          <a href="../login.php" class="user-name">Login</a>
+        <?php endif; ?>
+        
+        <i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i>  
     </div>
   </div>
 </header>

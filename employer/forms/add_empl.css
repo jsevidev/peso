@@ -1,0 +1,165 @@
+:root {
+  --primary-blue: #0a008f;
+  --text-primary: #000000;
+  --text-light: #f3f7fa;
+  --background-light: #ffffff;
+  --border-color: #000000;
+  --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: var(--text-primary);
+}
+
+
+  .add-employer-modal {
+    max-width: 839px;
+    margin: auto;
+    background-color: var(--background-light);
+    border-radius: 30px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 31px;
+    background-color: var(--background-light);
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0px 0px 10px 0px var(--shadow-color);
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .close-button {
+    background-color: var(--background-light);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px var(--shadow-color);
+    color: var(--text-primary);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    padding: 8px 17px;
+    cursor: pointer;
+  }
+
+  .modal-body {
+    padding: 27px 60px 40px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 44px;
+    row-gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+  }
+
+  .form-group input[type="text"],
+  .custom-select-wrapper select {
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-light);
+    padding: 0 12px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+  }
+
+  .custom-select-wrapper {
+    position: relative;
+    width: 281px; /* As per Figma node 177:1529 */
+  }
+
+  .custom-select-wrapper::after {
+    content: '▾';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 19px;
+    font-weight: 700;
+    pointer-events: none;
+    color: var(--text-primary);
+  }
+
+  .custom-select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 80px 34px;
+  }
+
+  .save-button {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    padding: 0 21px; /* Height is 25px, line-height is 24px, so almost no vertical padding */
+    height: 25px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 860px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .modal-header {
+      padding: 20px;
+    }
+    .modal-footer {
+      padding: 20px;
+    }
+    .custom-select-wrapper {
+      width: 100%;
+    }
+  }

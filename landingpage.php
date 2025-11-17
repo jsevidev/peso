@@ -32,7 +32,7 @@ session_start();
       </nav>
       <div class="header-actions">
         <!-- OPEN MODAL -->
-        <a href="#" class="btn-post-fairs js-open-signup">POST JOB FAIRS</a>
+        <a href="" class="btn-post-fairs js-open-signup">POST JOB FAIRS</a>
         <a href="#" class="auth-link">LOG IN</a>
         <a href="#" class="auth-link js-open-signup">SIGN UP</a>
       </div>
@@ -49,6 +49,7 @@ session_start();
         <div class="hero-panel employer-panel">
           <div class="panel-content">
             <h2 class="panel-title">I'm an Employer</h2>
+
             <!-- OPEN MODAL -->
             <a href="#" class="btn-action js-open-signup">START POSTING FOR JOB FAIRS</a>
           </div>
@@ -85,7 +86,7 @@ session_start();
         <div class="signup-card">
           <h1 class="title" id="signupModalTitle">Create an Employer account</h1>
           <p class="login-prompt">
-            Already have an ccount? <a href="#">Log in</a>
+            Already have an account? <a href="login.php">Log in</a>
           </p>
 
           <form method="POST" action="employer_signup_handler.php" class="signup-form">
@@ -114,16 +115,7 @@ session_start();
             <button type="submit" name="signup" class="btn btn-primary">Create Account</button>
           </form>
 
-          <div class="divider-container">
-            <div class="divider-line"></div>
-            <span class="divider-text">OR</span>
-            <div class="divider-line"></div>
-          </div>
-
-          <a href="#" class="btn btn-secondary">
-            <img src="${ASSET_PATH}/I331_1222_2_979.svg" alt="Google logo">
-            <span>Continue with Google</span>
-          </a>
+        
         </div>
       </section>
       <!-- ================== /SIGN-UP ================== -->
