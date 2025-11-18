@@ -167,21 +167,18 @@
                 }
 
                 // Fetch logged-in applicant details
+                        $applicant_data = null;
                         if (isset($_SESSION['applicant_id'])) {
-                            $applicant_id = $_SESSION['applicant_id'];
+                            $appl_id = $_SESSION['applicant_id'];
 
-                            $sql = "SELECT * FROM applicant_profile WHERE appl_profile_id = ?";
+                            $sql = "SELECT appl_profile_id, full_name, email, contact_no, resume FROM applicant_profile WHERE appl_id = ?";
                             $stmt = $mysqli->prepare($sql);
-                            $stmt->bind_param("i", $applicant_id);
+                            $stmt->bind_param("i", $appl_id);
                             $stmt->execute();
                             $result = $stmt->get_result();
 
                             if ($result->num_rows > 0) {
-                                $applicant = $result->fetch_assoc();
-                                // Store applicant details
-                                $full_name = htmlspecialchars($applicant['full_name']);
-                                $email = htmlspecialchars($applicant['email']);
-                                $contact_number = htmlspecialchars($applicant['contact_no']);
+                                $applicant_data = $result->fetch_assoc();
                             }
                         }
 
@@ -195,21 +192,93 @@
     </div>
     </section>
 
-    <!-- Apply Form Modal -->
-<!-- <div id="apply-modal" class="apply-modal">
-    <div class="modal-content">
-        <span id="close-modal" class="close-button">&times;</span>
-        <h2>Apply for Job</h2>
-        Include your external apply form here 
-        <iframe src="apply_form.php" id="apply-iframe" name="apply-form" frameborder="0"></iframe>
+    <!-- MODAL FOR APPLYING FOR A JOB -->
+    <div id="apply-modal" class="joblisting-apply-modal" aria-hidden="true">
+        <div class="apply-modal-container" role="dialog" aria-modal="true">
+            <header class="modal-header">
+                <h1 class="header-title">Apply Now</h1>
+                <button type="button" class="close-button" onclick="closeModal()">CLOSE</button>
+            </header>
+            <div class="modal-body">
+                <section class="job-details">
+                    <h2 class="job-title" id="modal-job-title">Job Title</h2>
+                    <p class="job-meta" id="modal-job-meta">
+                        <span id="modal-company-name"></span>
+                        <em class="posted-date" id="modal-posted-date"></em>
+                    </p>
+                    <div class="salary-info">
+                        <p class="salary-range" id="modal-salary-range"></p>
+                        <span class="job-type-tag" id="modal-job-type"></span>
+                    </div>
+                    <div class="about-section">
+                        <h3 class="section-heading">About Us</h3>
+                        <p class="description" id="modal-description"></p>
+                    </div>
+                    <div class="skills-section">
+                        <h3 class="section-heading">Skills</h3>
+                        <div class="skills-tags" id="modal-skills"></div>
+                    </div>
+                </section>
+                <aside class="application-form-section">
+                    <form class="application-form" id="application-form" method="POST" action="modal/submit_application.php" enctype="multipart/form-data">
+                        <input type="hidden" name="job_id" id="application-job-id">
+                        <input type="hidden" name="appl_profile_id" id="application-appl-profile-id">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="full-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-number">Contact Number</label>
+                            <input type="tel" id="contact-number" name="contact-number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume">Resume</label>
+                            <div class="file-input-wrapper">
+                                <input type="text" id="resume-display" name="resume-display" readonly>
+                                <button type="button" class="choose-file-btn" onclick="document.getElementById('resume-file').click()">Choose File</button>
+                                <input type="file" id="resume-file" name="resume" class="visually-hidden" aria-label="Upload Resume" accept=".pdf,.doc,.docx" onchange="document.getElementById('resume-display').value = this.files[0]?.name || ''">
+                            </div>
+                            <input type="hidden" id="existing-resume" name="existing-resume">
+                        </div>
+                        <div class="form-group">
+                            <label for="cover-letter">Cover Letter</label>
+                            <textarea id="cover-letter" name="cover-letter" rows="4"></textarea>
+                        </div>
+                        <div class="form-group agreement-section">
+                            <div class="agreement-wrapper">
+                                <input type="checkbox" id="agreement" name="agreement" required>
+                                <label for="agreement" class="agreement-label">
+                                    I agree to share my application with the employer.
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-button">SUBMIT APPLICATION</button>
+                    </form>
+                </aside>
+            </div>
+        </div>
     </div>
-</div> -->
 
+    <!-- Consent Popup -->
+    <div id="consent-popup" class="consent-popup" style="display: none;">
+        <div class="consent-popup-content">
+            <div class="consent-icon">
+                <i class="fa-solid fa-exclamation-circle"></i>
+            </div>
+            <h3>Consent Required</h3>
+            <p>Please agree to share your application with the employer before submitting.</p>
+            <button onclick="closeConsentPopup()" class="consent-ok-btn">OK</button>
+        </div>
+    </div>
 
-
-
-
-
+    <script>
+        // Pass applicant data to JavaScript
+        const applicantData = <?php echo json_encode($applicant_data); ?>;
+    </script>
     <script src="modal/modal.js"></script>
 
 </body>
